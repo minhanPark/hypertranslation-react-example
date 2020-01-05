@@ -47,3 +47,43 @@ const Header = () => {
 };
 
 ```
+
+각 컴포넌트에서 useContext를 반복하고 싶지 않다면 컨텍스트를 생성하는 context.js 파일에서 사용할 값만 함수로 리턴해주면 됩니다.
+
+```js
+// context.js
+
+const UserContextProvider = ({ children }) => {
+  const [user, setUser] = useState({
+    name: "RunningWater",
+    loggedIn: false
+  });
+  const userLogin = () => setUser({ ...user, loggedIn: true });
+  const userLogout = () => setUser({ ...user, loggedIn: false });
+  return (
+    <UserContext.Provider value={{ user, fn: { userLogin, userLogout } }}>
+      {children}
+    </UserContext.Provider>
+  );
+};
+
+// user의 정보를 담고 있는 user객체를 리턴하는 함수입니다..
+export const useUser = () => {
+  const { user } = useContext(UserContext);
+  return user;
+};
+
+// user 객체의 정보를 수정하는 함수를 리턴하는 함수입니다.
+export const useFns = () => {
+  const { fn } = useContext(UserContext);
+  return fn;
+};
+```
+
+```js
+// header.js
+
+const { name, loggedIn } = useUser();
+```
+
+그래서 컴포넌트에서는 해당 함수만을 갖고와서 값을 사용하면 됩니다.
