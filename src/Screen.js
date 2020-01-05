@@ -1,20 +1,18 @@
 import React from "react";
-import Header from "./Header";
-import { useUser, useFns } from "./context";
+import { useSetLang, useTranslate } from "./context";
 
 const Screen = () => {
-  const { loggedIn } = useUser();
-  const { userLogin, userLogout } = useFns();
+  const setLang = useSetLang();
+  const translate = useTranslate();
   return (
-    <div>
-      <Header />
-      <h1>First Screen</h1>
-      {loggedIn ? (
-        <button onClick={userLogout}>Logout</button>
-      ) : (
-        <button onClick={userLogin}>Login</button>
-      )}
-    </div>
+    <>
+      <h1>{translate("login")}</h1>
+      <h1>{translate("logout")}</h1>
+      <button onClick={() => setLang("en")}>english</button>
+      <button onClick={() => setLang("kr")}>한국어</button>
+      <button onClick={() => setLang("jp")}>日本語</button>
+      <button onClick={() => setLang("ru")}>Русский</button>
+    </>
   );
 };
 

@@ -2,6 +2,8 @@
 
 useContext를 이용해서 만들어 본 리액트 번역기입니다.
 
+## 콘텍스트 설명
+
 ```js
 export const UserContext = React.createContext();
 
@@ -87,3 +89,33 @@ const { name, loggedIn } = useUser();
 ```
 
 그래서 컴포넌트에서는 해당 함수만을 갖고와서 값을 사용하면 됩니다.
+
+## 예시
+
+![심플 번역기](https://drive.google.com/uc?id=1oF7Z-Shike2szcBY2vGkG0wcEO2CXPcm)  
+해당 개념을 통해서 만들어 본 번역기입니다. 로그인과 로그아웃을 번역합니다.  
+
+```js
+// translations.js
+
+const translations = {
+  en: {
+    login: "login",
+    logout: "logout"
+  },
+  kr: {
+    login: "로그인",
+    logout: "로그아웃"
+  },
+  jp: {
+    login: "ログイン",
+    logout: "ログアウト"
+  },
+  ru: {
+    login: "Вход",
+    logout: "Выход"
+  }
+};
+```
+
+번역할 것들을 모아놓은 translations.js 파일입니다. 해당 파일에 구문을 추가하고 버튼 누르고 콘텍스트를 통해서 번역기 됩니다.
